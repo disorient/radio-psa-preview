@@ -16,24 +16,22 @@
 
             #playstop {
                 position: absolute;
-                font-size: 5vw;
                 left: 50%;
                 top: 50%;
                 text-align: center;
-                width: 12%;
-                height: 12%;
-                margin-top: -6%;
-                margin-left: -6%;
+                width: 5%;
+                margin-top: -5%;
+                margin-left: -2.5%;
                 z-index: -1;
-                
+
             }
         </style>
     </head>
     <body>
-        <img id="d" src="d.png">
+        <img id="d" src="d.png" />
         <audio id="player"></audio>
 
-        <div id="playstop" class="play">&#x23F5;</div>
+        <img id="playstop" src="play.png" />
         <script>
             var list = [ 
                 "INTRO AUDIO 90.3 FEMALE.wav",
@@ -50,14 +48,14 @@
             function play() {
                 if (player.currentTime > 0 && !player.paused) {
                     player.pause();
-                    playstop.innerHTML = "&#x23F5;";
+                    playstop.src = "play.png";
                 }
                 else {
-                    playstop.innerHTML = "&#x23F9;";
+                    playstop.src = "stop.png";
                     console.log("Playing " + index + ": " + list[index]);
                     player.src = list[index];
                     player.play();
-                    
+
                     index += 1;
                     if (index >= list.length) {
                         index=0;
