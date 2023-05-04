@@ -12,6 +12,19 @@
                 margin-left: -12.5%;
                 margin-top: -12.5%;
                 cursor: pointer;
+            }
+
+            #playstop {
+                position: absolute;
+                font-size: 5vw;
+                left: 50%;
+                top: 50%;
+                text-align: center;
+                width: 12%;
+                height: 12%;
+                margin-top: -6%;
+                margin-left: -6%;
+                z-index: -1;
                 
             }
         </style>
@@ -20,22 +33,36 @@
         <img id="d" src="d.png">
         <audio id="player"></audio>
 
+        <div id="playstop" class="play">&#x23F5;</div>
         <script>
             var list = [ 
                 "INTRO AUDIO 90.3 FEMALE.wav",
                 "SATELLITE SEANCES BREAK.mp3",
-                "THE ALL NIGHTER.wav",
+                "TICKS PSA.mp3",
                 "90.3 tag male radio synth.wav",
                 "TICKS PSA.mp3"
             ]
             var index = 0
             var button = document.getElementById('d');
             var player = document.getElementById('player');
+            var playstop = document.getElementById('playstop');
     
             function play() {
-                player.src = list[index];
-                player.play();
-                if (index++ >= list.length-1) index=0;
+                if (player.currentTime > 0 && !player.paused) {
+                    player.pause();
+                    playstop.innerHTML = "&#x23F5;";
+                }
+                else {
+                    playstop.innerHTML = "&#x23F9;";
+                    console.log("Playing " + index + ": " + list[index]);
+                    player.src = list[index];
+                    player.play();
+                    
+                    index += 1;
+                    if (index >= list.length) {
+                        index=0;
+                    }
+                }
             }
 
             button.addEventListener("click", play);
